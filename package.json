@@ -1,0 +1,33 @@
+{
+	"name": "l10n-cli",
+	"description": "Command-line interface for L10N.website",
+	"version": "0.0.1",
+	"author": "kdi",
+	"contributors": [
+		{ "name": "Makis Tracend", "email": "makis@kdi.co" }
+	],
+	"homepage": "http://l10n.website",
+	"keywords": ["l10n", "api", "cli", "json"],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/l10n-website/cli.git"
+	},
+	"bugs": {
+		"url": "http://github.com/l10n-website/cli/issues"
+	},
+	"licenses": [{
+		"type": "MIT",
+		"url": "http://www.makesites.org/licenses/MIT"
+	}],
+	"engines": { "node": ">=0.8.x" },
+	"main": "index",
+	"bin": {
+		"l10n": "bin/l10n"
+	},
+	"dependencies": {
+		"commander": "2.1.0",
+		"l10n-api": "*",
+		"prompt": "0.2.12",
+		"underscore": "1.7.0"
+	}
+}
