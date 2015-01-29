@@ -1,0 +1,63 @@
+#!/usr/local/bin/node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander'),
+	main = require('../lib/main'),
+	path = require('path'),
+	fs = require('fs');
+
+var exec;
+// package info
+var package = JSON.parse( fs.readFileSync( path.resolve( __dirname, '../package.json'), 'utf-8') ); // condition the existance of package.json?
+
+program
+	.version( package.version )
+	.option('-c, --config <path>', 'Set config path. Defaults to ~/.l10n')
+	.option('-r, --reset', 'Reset token saved');
+
+/* Setup */
+program
+	.command('setup')
+	.description('Setup credentials')
+	.action(function(options){
+		process.nextTick(function(){
+			exec.setup(options )
+		});
+	});
+
+/* User */
+program
+	.command('user [id]')
+	.description('Read user info')
+	.action(function(id, options){
+		id = id || false;
+		process.nextTick(function(){
+			exec.user( id, options )
+		});
+	});
+
+/* Domain */
+program
+	.command('domain [id]')
+	.description('Read product details')
+	.option("-a, --all", "List all products for user")
+	.action(function(id, options){
+		id = id || false;
+		process.nextTick(function(){
+			exec.product( id, options )
+		});
+	})
+	.on('--help', function() {
+		console.log('  Examples:');
+		console.log();
+		console.log('    $ domain {{id}}');
+		console.log('    $ domain --all');
+		console.log();
+});
+
+program.parse(process.argv);
+
+exec = main( program );
